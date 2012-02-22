@@ -1,19 +1,17 @@
-- text_array = []
-- 5.times { text_array << Faker::Lorem.paragraph }
-| Click on the truncated text below
+| List of truncated car descriptions
 br
 br
 br
 ol
-  - text_array.length.times do |i|
-    div{id="text-#{i}" class="modal hide fade" style="display: none;"}
+  - @cars.each do |car|
+    div{id="car-#{car.id}" class="modal hide fade" style="display: none;"}
       .modal-header
         a.close{data-dismiss="modal"} ×
-        h3 Full Text
+        h3 Full Description of Car##{car.id}
       .modal-body
-        p #{text_array[i]}
+        p #{car.description}
       .modal-footer
         a.btn{href="#" data-dismiss="modal"} Close
 
     li
-      span{data-toggle="modal" href="#text-#{i}"} #{text_array[i].truncate(25, :separator => ' ')}
+      span{data-toggle="modal" href="#car-#{car.id}"} #{car.description.truncate(25, :separator => ' ')}
