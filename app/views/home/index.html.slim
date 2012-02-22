@@ -1,12 +1,19 @@
-#my-modal.modal.hide.fade{style='display: none;'}
-  .modal-header
-    a.close{data-dismiss='modal'} ×
-    h3 Modal Heading
-  .modal-body
-    h4 Text in a modal
-    p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.
-  .modal-footer
-    a.btn.btn-primary{href='#'} Save changes
-    a.btn{href='#' data-dismiss='modal'} Close
+- text_array = []
+- 5.times { text_array << Faker::Lorem.paragraph }
+| Click on the truncated text below
+br
+br
+br
+ol
+  - text_array.length.times do |i|
+    div{id="text-#{i}" class="modal hide fade" style="display: none;"}
+      .modal-header
+        a.close{data-dismiss="modal"} ×
+        h3 Full Text
+      .modal-body
+        p #{text_array[i]}
+      .modal-footer
+        a.btn{href="#" data-dismiss="modal"} Close
 
-a.btn.btn-primary.btn-large{data-toggle='modal' href='#my-modal'}Launch demo modal
+    li
+      span{data-toggle="modal" href="#text-#{i}"} #{text_array[i].truncate(25, :separator => ' ')}
